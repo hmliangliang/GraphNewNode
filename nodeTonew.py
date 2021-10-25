@@ -14,11 +14,13 @@ def reshapeGraph(data,signal):
     signal: 0或1  0:表示该图为无向图   1:表示该图为有向图
     '''
     data = np.random.rand(2, 3)
-    nodeset = np.unique(data) #节点的集合
+    nodeset = np.unique(data)
     row_len = data.shape[0]
     col_len = data.shape[1]
     # 重新对节点进行编号
     for i in range(row_len):
         for j in range(col_len):
             data[i, j] = np.argwhere(nodeset == data[i, j])[0][0]
+            if signal == 0:
+                data[j, i] = data[i, j]
     return data, nodeset
